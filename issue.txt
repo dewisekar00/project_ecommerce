@@ -1,0 +1,8 @@
+error issue:
+"Objects are not valid as a React child", ini mungkin terjadi karena kamu mencoba merender objek secara langsung di dalam komponen React.
+
+before:
+<span>{addCart}</span>
+
+after:
+<span>{addCart.title}</span>

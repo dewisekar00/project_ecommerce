@@ -1,0 +1,24 @@
+how to use Redux:
+
+1.Call API
+2.Add reducer
+3.Add ExtraReducers
+
+how to add cart 
+
+1.Perhatikan component apa aja yang terlibat
+-productCard
+-Navbar
+
+2.indentifikasi API endpoint :
+cara dapetin id untuk api nya
+-ke productCard untuk buat props id
+-ke pemanggilan component productCard(APp.jsx) untuk dapetin id dari products
+
+3.Buat reducer, initialState apa aja yang diperlukan untuk addCart?
+-total/counter untuk item
+-total Price
+-addCart untuk simpan datanya
+
+
+4.Filter Produk dengan cara membuat API jadi dinamis
