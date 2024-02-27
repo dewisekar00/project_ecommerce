@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import SearchingProduct from './SearchingProduct';
 
 const Navbar = () => {
   const totalPrice = useSelector((state) => state.addCart.totalPrice);
@@ -12,6 +13,10 @@ const Navbar = () => {
     <div className="navbar bg-base-100 sticky top-0 z-40 md:px-8">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">shosho</a>
+      </div>
+
+      <div className="hidden sm:block">
+<SearchingProduct />
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">

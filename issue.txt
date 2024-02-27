@@ -6,3 +6,68 @@ before:
 
 after:
 <span>{addCart.title}</span>
+
+_______start problem searching fiture_______
+
+find problem searching fiture:
+-filter by category : successed
+-search: 
+ ketika di allproduct percobaan pertama: successed
+-filter product setelah search : failed
+-searching: failed
+
+
+1. state fetchProduct = 20 data
+
+
+2. searching = 
+women = 6 data
+
+3. bersihkan input =
+   state searching = 14 data
+
+4. klik category jewelery setelah searching
+
+>  berhasil dapat category jewelery =  4 data
+>  tapi state searching juga masih ikut berisi = 20 data
+
+expect = 
+
+> ketika category di klik maka searching = 0
+
+
+problem: 
+> ketika searchValue kosong , data searchResultSlice itu berisi 20 data dan ini yang membuat var searchResult di App.jsx akan terus menjalankan
+kode ini karena data di searchResultSlice itu ada 20 data dan > 0
+
+  searchResult && searchResult.length > 0
+              ? searchResult.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    image={product.image}
+                    title={product.title}
+                    price={product.price}
+                    handleAddToCart={handleAddToCart}
+                  />
+                ))
+
+solved:
+kirim data null/kosong ke searchResultSlice kalo searchValue itu empty string
+maka kode yang akan dijalankan adalah ini 
+
+products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    image={product.image}
+                    title={product.title}
+                    price={product.price}
+                    handleAddToCart={handleAddToCart}
+                  />
+))
+
+
+approach: dengan melihat perubahan state di redux dev tools
+
+_____end problem_____

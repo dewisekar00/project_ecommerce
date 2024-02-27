@@ -16,9 +16,18 @@ cara dapetin id untuk api nya
 -ke pemanggilan component productCard(APp.jsx) untuk dapetin id dari products
 
 3.Buat reducer, initialState apa aja yang diperlukan untuk addCart?
--total/counter untuk item
+-total/counter untuk item 
 -total Price
 -addCart untuk simpan datanya
 
 
 4.Filter Produk dengan cara membuat API jadi dinamis
+
+5.Searching product 
+
+> buat component input untuk screen mobile dan desktop
+> ambil value inputan dan simpan di state local
+> filter product berdasarkan value inputan dan filter berdasarkan title dan category
+> simpan hasil filter ke Redux, setelah data yang terfilter tersimpan di redux maka bisa digunakan
+
+

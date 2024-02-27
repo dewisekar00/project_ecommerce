@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { fetchProductsData } from '../config/redux/Slice/productsSlice';
+import SearchingProduct from './SearchingProduct';
 
 const NavMobile = () => {
   const dispatch = useDispatch();
@@ -15,13 +16,20 @@ const NavMobile = () => {
   };
 
   return (
+    <>
+
+    
+  <div className='mx-8 mb-4'>
+<SearchingProduct />
+  </div>
     <select className="select w-full max-w-xs" onChange={handleChange}>
-      <option value="">Select category</option>
+      <option value="">All category</option>
       <option value="women's clothing">Women Fashion</option>
       <option value="men's clothing">Men Fashion</option>
       <option value="electronics">Electronic</option>
       <option value="jewelery">Jewelery</option>
     </select>
+    </>
   );
 };
 
