@@ -31,3 +31,8 @@ cara dapetin id untuk api nya
 > simpan hasil filter ke Redux, setelah data yang terfilter tersimpan di redux maka bisa digunakan
 
 
+
+6.Detail Product
+
+> Done: create component detail and make route
+> Next : ubah datanya sesuai id product dan ubah route tambahkan id product ketika di klik dan buat responsive

@@ -5,13 +5,15 @@ import addCart from './Slice/addCart';
 import total from './Slice/addCart'
 import totalPrice from './Slice/addCart'
 import searchResultSlice from './Slice/searchResultSlice';
+import detailProduct from './Slice/detailProduct';
 const store = configureStore({
   reducer: {
     products,
     addCart,
     total,
     totalPrice,
-    searchResultSlice
+    searchResultSlice,
+    detailProduct
   },
 });
 
