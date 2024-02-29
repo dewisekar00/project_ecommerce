@@ -71,3 +71,13 @@ products.map((product) => (
 approach: dengan melihat perubahan state di redux dev tools
 
 _____end problem_____
+
+
+issue : 
+tempat = detailProduct 
+masalah = ketika di refres data hilang
+kemungkinan penyebab:
+> data terpanggil jika ada id yang dikirim ke slice API
+> dan ketika di refres tidak ada id yang dikirim
+
+solved: pending

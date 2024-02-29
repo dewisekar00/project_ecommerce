@@ -13,7 +13,7 @@ export const fetchDetailProduct = createAsyncThunk(
 const detailProductSlice = createSlice({
   name: "detailProduct",
   initialState: {
-   detailProduct: [],
+   detailProduct: {},
    status: 'idle'
   },
   reducers: {
@@ -27,7 +27,7 @@ const detailProductSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchDetailProduct.fulfilled, (state, action) => {
-        state.detailProduct = [action.payload];
+        state.detailProduct = action.payload;
         state.status = "success";
       })
       .addCase(fetchDetailProduct.rejected, (state) => {

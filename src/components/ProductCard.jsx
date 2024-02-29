@@ -43,7 +43,7 @@ const ProductCard = (props) => {
           </div>
           <div className="flex justify-end ">
             <button
-              className="btn bg-black text-white text-xs btn-sm"
+              className="btn bg-green-400 text-white text-xs btn-sm"
               onClick={handleAddToCart}
             >
               Add to cart

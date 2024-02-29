@@ -15,7 +15,7 @@ const Sidebar = () => {
       <h2 className="font-bold mb-4">category</h2>
       <div>
         <div className=" mb-4 cursor-pointer ">
-          <span className="label-text hover:text-slate-500" onClick={() => handleClick('', " ")}>
+          <span className="label-text hover:text-slate-500 " onClick={() => handleClick('', " ")}>
          All Products
           </span>
         </div>

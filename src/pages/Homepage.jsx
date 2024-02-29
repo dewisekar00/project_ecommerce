@@ -32,7 +32,7 @@ const Homepage = () => {
     <>
       <Navbar />
       <div className="grid grid-cols-12 mt-8 ">
-        <div className="sm:col-span-3 col-span-12 mb-20   ">
+        <div className="sm:col-span-3 col-span-12 mb-16   ">
           <div className="hidden lg:block">
             <Sidebar />
           </div>
