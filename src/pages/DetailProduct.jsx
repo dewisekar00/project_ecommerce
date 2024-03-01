@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAddCart } from "../config/redux/Slice/addCart";
 
-const DetailPost = () => {
+const DetailProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const detailProduct = useSelector(
@@ -12,6 +12,10 @@ const DetailPost = () => {
   const status = useSelector((state) => state.detailProduct.status);
   const handleBack = () => {
     navigate("/");
+  };
+
+  const handleToCart = () => {
+    navigate("/cart");
   };
 
   const handleAddToCart = (id) => {
@@ -76,7 +80,7 @@ const DetailPost = () => {
                     <button className="btn">close</button>
                     <button
                       className="btn bg-green-300   mx-4"
-                      onClick={handleBack}
+                      onClick={handleToCart}
                     >
                       view cart
                     </button>
@@ -91,4 +95,4 @@ const DetailPost = () => {
   );
 };
 
-export default DetailPost;
+export default DetailProduct;

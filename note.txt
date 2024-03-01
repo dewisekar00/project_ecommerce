@@ -35,4 +35,18 @@ cara dapetin id untuk api nya
 6.Detail Product
 
 > Done: create component detail and make route
-> Next : ubah datanya sesuai id product dan ubah route tambahkan id product ketika di klik dan buat responsive
+> Done : ubah datanya sesuai id product dan ubah route tambahkan id product ketika di klik dan buat responsive
+
+7.Page product Cart:
+
+-image 
+-title
+-Price
+-counter
+
+condition:
+> ketika checkbox is checked totalin harganya
+
+progress:(pending)
+> ketika ada id product yang sama mau ditambahkan itu udah ada maka jangan tambahkan productnya dan kasih tau kalo product udah di tambahkan
+

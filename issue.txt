@@ -81,3 +81,9 @@ kemungkinan penyebab:
 > dan ketika di refres tidak ada id yang dikirim
 
 solved: pending
+
+
+issue: 
+> product addCart hanya menyimpan 1 data terbaru aja di state setiap action berjalan
+solved:
+> dengan mengubah state addCart = [] dan menambahkan setiap data yang dikirim action ke dalam array

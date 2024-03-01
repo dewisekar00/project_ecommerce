@@ -13,7 +13,7 @@ export const fetchAddCart = createAsyncThunk(
 const addCartSlice = createSlice({
   name: "addCart",
   initialState: {
-    addCart: null,
+    addCart: [],
     total: 0,
     totalPrice: 0,
     status: "idle",
@@ -29,7 +29,7 @@ const addCartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchAddCart.fulfilled, (state, action) => {
-        state.addCart = action.payload;
+        state.addCart = [...state.addCart, action.payload];
         state.totalPrice += action.payload.price;
         state.total += 1;
         state.status = "success";
