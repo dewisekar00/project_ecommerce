@@ -1,22 +1,36 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { fetchAddCart } from "../config/redux/Slice/addCart";
 import { useNavigate } from "react-router-dom";
 import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
 
+import { useDispatch, useSelector } from "react-redux";
+
+
 const ProductCard = (props) => {
   const { id, image, title, price } = props;
-
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.addCart.addCart);
+
   const handleAddToCart = () => {
-    dispatch(fetchAddCart(id));
+    // Cek apakah produk sudah ada di keranjang belanja
+    const isProductExist = products.some((product) => product.id === id);
+    if (isProductExist) {
+      document.getElementById("my_modal_1").showModal();
+    } else {
+      // Jika belum ada, tambahkan produk ke keranjang belanja
+      dispatch(fetchAddCart(id));
+    }
   };
 
   const navigate = useNavigate();
 
   const toDetailProduct = () => {
-    navigate("/detail-product");
+    navigate(`/detail-product/${id}`);
     dispatch(fetchDetailProduct(id));
+  };
+
+  const handleToCart = () => {
+    navigate("/cart");
   };
 
   return (
@@ -48,6 +62,27 @@ const ProductCard = (props) => {
             >
               Add to cart
             </button>
+
+
+            
+            <dialog id="my_modal_1" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">message</h3>
+                <p className="py-4">The product is already in the cart!</p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">close</button>
+                    <button
+                      className="btn bg-green-300   mx-4"
+                      onClick={handleToCart}
+                    >
+                      view cart
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>
@@ -56,3 +91,4 @@ const ProductCard = (props) => {
 };
 
 export default ProductCard;
+

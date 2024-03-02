@@ -72,7 +72,7 @@ approach: dengan melihat perubahan state di redux dev tools
 
 _____end problem_____
 
-
+______
 issue : 
 tempat = detailProduct 
 masalah = ketika di refres data hilang
@@ -82,8 +82,31 @@ kemungkinan penyebab:
 
 solved: pending
 
+_____
 
 issue: 
 > product addCart hanya menyimpan 1 data terbaru aja di state setiap action berjalan
 solved:
 > dengan mengubah state addCart = [] dan menambahkan setiap data yang dikirim action ke dalam array
+
+__________
+
+> issue:
+ketika halaman DetailProduct dimuat hilang maka datanya akan hilang
+> penyebab:
+data itu muncul ketika action nya itu membawa id,id ini itu tersimpan di redux,maka dari itu ketika halaman di muat ulang id akan hilang dan data ngga muncul
+> solution: Dengan ubah routes dengan tambahan id
+1.tambahkan :id diparams detail-produt/:id
+
+2.buat id nya jadi dinamis di component ProductCard(sesuai dengan id product yang diklk)
+ navigate(`/detail-product/${id}`); 
+ jadinya sekarang di DetailProduct ada tambahan id sebagai params
+
+3.Di DetailProduct ambil id params dengan useParams()
+dan masukan id yang didapat dari useParams()  ke useEffect
+
+useEffect(() => {
+  dispatch(fetchDetailProduct(id))
+}, [dispatch, id])
+
+_____

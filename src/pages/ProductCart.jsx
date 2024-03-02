@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const ProductCart = () => {
   const products = useSelector((state) => state.addCart.addCart);
   const navigate = useNavigate();
-
   const [counts, setCounts] = useState(() => products.map(() => 1));
   const [isChecked, setIsChecked] = useState(() => products.map(() => false));
   const [totalPrice, setTotalPrice] = useState(0);
@@ -70,8 +69,8 @@ const ProductCart = () => {
           </p>
         ) : (
           products.map((product, index) => (
-            <div key={index} className="p-4 ">
-              <div className="border border-gray-200 w-full md:w-4/12 h-28 p-2 grid grid-cols-12 rounded-lg">
+            <div key={index} className="py-2 px-4 ">
+              <div className="border border-gray-200 w-full md:w-4/12 h-28 p-2  grid grid-cols-12 rounded-lg">
                 <div className="flex col-span-5">
                   <div className="flex items-center mr-2">
                     <input
@@ -84,11 +83,11 @@ const ProductCart = () => {
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-24 h-24 object-cover rounded-xl"
+                    className="w-20 h-24 object-cover rounded-xl"
                   />
                 </div>
                 <div className="col-span-7 pl-4 flex flex-col justify-between">
-                  <h1 className="font-semibold ">
+                  <h1 className="font-semibold text-sm ">
                     {product.title.length > 40
                       ? `${product.title.slice(0, 40)}...`
                       : product.title}
@@ -111,14 +110,14 @@ const ProductCart = () => {
       </div>
 
       {products.length > 0 && (
-        <div className="bg-slate-100 w-full h-24 fixed bottom-0 inset-x-0 grid grid-cols-12 flex items-center ">
+        <div className="bg-green-300  w-full h-24 fixed bottom-0 inset-x-0 grid grid-cols-12 flex items-center ">
           <div className="col-span-7 pl-4">
-            <p className="font-semibold">Total Price for {totalItems} items</p>
-            <p className="text-xl text-green-400 font-bold mt-2 ">
+            <p className="text-sm">Total Price for {totalItems} items</p>
+            <p className="text-xl text-green-600 font-bold mt-2 ">
               {totalPrice} $
             </p>
           </div>
-          <button className="btn bg-green-400 text-white font-bold  col-span-4">
+          <button className="btn bg-green-600 border-none text-white font-bold  col-span-4">
             Checkout
           </button>
         </div>
@@ -128,3 +127,5 @@ const ProductCart = () => {
 };
 
 export default ProductCart;
+
+// ketika action berjalan maka data akan tersimpan di redux baru digunakan disiini
