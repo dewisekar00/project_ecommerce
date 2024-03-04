@@ -5,24 +5,31 @@ import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
 
 import { useDispatch, useSelector } from "react-redux";
 
-
 const ProductCard = (props) => {
   const { id, image, title, price } = props;
   const dispatch = useDispatch();
   const products = useSelector((state) => state.addCart.addCart);
 
   const handleAddToCart = () => {
-    // Cek apakah produk sudah ada di keranjang belanja
-    const isProductExist = products.some((product) => product.id === id);
-    if (isProductExist) {
-      document.getElementById("my_modal_1").showModal();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // Jika pengguna belum login, tampilkan pesan atau arahkan ke halaman login
+      document.getElementById("my_modal_2").showModal();
     } else {
-      // Jika belum ada, tambahkan produk ke keranjang belanja
-      dispatch(fetchAddCart(id));
+      // Jika pengguna sudah login, cek apakah produk sudah ada di keranjang belanja
+      const isProductExist = products.some((product) => product.id === id);
+      if (isProductExist) {
+        document.getElementById("my_modal_1").showModal();
+      } else {
+        // Jika belum ada, tambahkan produk ke keranjang belanja
+        dispatch(fetchAddCart(id));
+      }
     }
   };
-
   const navigate = useNavigate();
+  const handleToLogin = () => {
+    navigate("/login");
+  };
 
   const toDetailProduct = () => {
     navigate(`/detail-product/${id}`);
@@ -57,14 +64,12 @@ const ProductCard = (props) => {
           </div>
           <div className="flex justify-end ">
             <button
-              className="btn bg-green-400 text-white text-xs btn-sm"
+              className="btn border bg-white text-green-400 border-green-400 rounded-full  text-xs btn-sm hover:bg-green-400 hover:text-white"
               onClick={handleAddToCart}
             >
               Add to cart
             </button>
 
-
-            
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">message</h3>
@@ -83,6 +88,25 @@ const ProductCard = (props) => {
                 </div>
               </div>
             </dialog>
+
+            <dialog id="my_modal_2" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">message</h3>
+                <p className="py-4">Kamu belum login nih,login dulu yuk!</p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">close</button>
+                    <button
+                      className="btn bg-green-300   mx-4"
+                      onClick={handleToLogin}
+                    >
+                      login
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>
@@ -91,4 +115,3 @@ const ProductCard = (props) => {
 };
 
 export default ProductCard;
-

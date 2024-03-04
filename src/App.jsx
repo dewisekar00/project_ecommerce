@@ -3,6 +3,7 @@ import "./App.css";
 import Homepage from "./pages/Homepage";
 import DetailProduct from "./pages/DetailProduct";
 import ProductCart from "./pages/ProductCart";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -12,14 +13,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/detail-product/:id" element={<DetailProduct />} />
           <Route path="/cart" element={<ProductCart />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-16">
-        <aside>
-          <p>Copyright © 2024 - All right reserved by nanamint</p>
-        </aside>
-      </footer> */}
     </>
   );
 }

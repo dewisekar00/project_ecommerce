@@ -11,6 +11,15 @@ const Navbar = () => {
   const handleToCart = () => {
     navigate("/cart");
   };
+  const token = localStorage.getItem("token");
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+  const handleLogin = () => {
+    navigate("/login");
+  };
+  
   return (
     <div className="navbar bg-base-100 sticky top-0 z-40 md:px-8">
       <div className="flex-1">
@@ -50,7 +59,9 @@ const Navbar = () => {
           >
             <div className="card-body">
               <span className="font-bold text-lg">{totalItems} Items</span>
-              <span className="text-green-700">Subtotal: ${totalPrice.toFixed(2)}</span>
+              <span className="text-green-700">
+                Subtotal: ${totalPrice.toFixed(2)}
+              </span>
               <div className="card-actions">
                 <button
                   className="btn bg-green-300 text-white btn-block"
@@ -81,16 +92,17 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <a className="justify-between">Profile</a>
             </li>
             <li>
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              {token ? (
+                <a onClick={handleLogOut}>Logout</a>
+              ) : (
+                <a onClick={handleLogin}>Login</a>
+              )}
             </li>
           </ul>
         </div>

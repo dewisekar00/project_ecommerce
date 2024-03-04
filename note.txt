@@ -51,3 +51,8 @@ progress:
 > (done) : ketika ada id product yang sama mau ditambahkan itu udah ada maka jangan tambahkan productnya dan kasih tau kalo product udah di tambahkan
 
 
+TASK
+
+> Rapihin codenya 
+> back up codenya 
+> merge ke brach main

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchAddCart } from "../config/redux/Slice/addCart";
 import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
+
 const DetailProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const DetailProduct = () => {
 useEffect(() => {
   dispatch(fetchDetailProduct(id))
 }, [dispatch, id])
+
   const handleBack = () => {
     navigate("/");
   };
@@ -26,7 +28,12 @@ useEffect(() => {
 
 
   const handleAddToCart = () => {
-    // Cek apakah produk sudah ada di keranjang belanja
+    const token = localStorage.getItem("token");
+    if (!token) {
+      document.getElementById("my_modal_3").showModal();
+    
+    }else {
+          // Cek apakah produk sudah ada di keranjang belanja
     const isProductExist = products.some((product) => product.id === detailProduct.id);
     if (isProductExist) {
       document.getElementById("my_modal_2").showModal();
@@ -35,10 +42,14 @@ useEffect(() => {
       dispatch(fetchAddCart(detailProduct.id));
       document.getElementById("my_modal_1").showModal();
     }
+    }
+
   };
 
+  const handleToLogin = () => {
+    navigate("/login");
+  }
 
-  // Menampilkan loading saat status adalah "loading"
   if (status === "loading") {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -47,7 +58,7 @@ useEffect(() => {
     );
   }
 
-  // Menampilkan detail produk jika sudah tersedia
+
   return (
     <>
       <div className="p-8 ">
@@ -103,7 +114,6 @@ useEffect(() => {
                 </div>
               </div>
             </dialog>
-
             <dialog id="my_modal_2" className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">message</h3>
@@ -117,6 +127,24 @@ useEffect(() => {
                       onClick={handleToCart}
                     >
                       view cart
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+            <dialog id="my_modal_3" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">message</h3>
+                <p className="py-4">Kamu belum login nih,login dulu yuk!</p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">close</button>
+                    <button
+                      className="btn bg-green-300   mx-4"
+                      onClick={handleToLogin}
+                    >
+                     login
                     </button>
                   </form>
                 </div>

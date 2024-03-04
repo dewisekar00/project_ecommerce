@@ -9,6 +9,7 @@ import NavMobile from "../components/NavMobile";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
 
+
 const Homepage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);

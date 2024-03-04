@@ -1,11 +1,12 @@
 // store.js
-import { configureStore } from '@reduxjs/toolkit';
-import products from './Slice/productsSlice';
-import addCart from './Slice/addCart';
-import total from './Slice/addCart'
-import totalPrice from './Slice/addCart'
-import searchResultSlice from './Slice/searchResultSlice';
-import detailProduct from './Slice/detailProduct';
+import { configureStore } from "@reduxjs/toolkit";
+import products from "./Slice/productsSlice";
+import addCart from "./Slice/addCart";
+import total from "./Slice/addCart";
+import totalPrice from "./Slice/addCart";
+import searchResultSlice from "./Slice/searchResultSlice";
+import detailProduct from "./Slice/detailProduct";
+import auth from "./Slice/authSlice";
 const store = configureStore({
   reducer: {
     products,
@@ -13,7 +14,8 @@ const store = configureStore({
     total,
     totalPrice,
     searchResultSlice,
-    detailProduct
+    detailProduct,
+    auth,
   },
 });
 
