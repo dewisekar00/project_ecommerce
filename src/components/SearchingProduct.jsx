@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchResults } from "../config/redux/Slice/searchResultSlice";
 
-
 const SearchingProduct = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
 
   // ini akan dijalankan secara otomatis ketika input value kosong
   useEffect(() => {
     // Periksa apakah nilai input kosong
-    if (searchValue.trim() === '') {
+    if (searchValue.trim() === "") {
       dispatch(setSearchResults(null)); // Jika ya, kirim null ke Redux
     }
   }, [searchValue, dispatch]);
@@ -20,7 +19,7 @@ const SearchingProduct = () => {
     event.preventDefault();
 
     // Tambahkan kondisi untuk menangani searchValue kosong
-    if (searchValue.trim() !== '') {
+    if (searchValue.trim() !== "") {
       let filteredProducts = products.filter(
         (product) =>
           product.title.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -62,6 +61,5 @@ const SearchingProduct = () => {
 };
 
 export default SearchingProduct;
-
 
 // buat kondisi if(searchValue === " ") --> kirim data null ke redux

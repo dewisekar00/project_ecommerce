@@ -1,13 +1,21 @@
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Homepage from "./pages/Homepage";
-import DetailProduct from "./pages/DetailProduct";
-import ProductCart from "./pages/ProductCart";
-import Login from "./components/Login";
+
+const Homepage = lazy(() => import("./pages/Homepage"));
+const DetailProduct = lazy(() => import("./pages/DetailProduct"));
+const ProductCart = lazy(() => import("./pages/ProductCart"));
+const Login = lazy(() => import("./components/Login"));
 
 function App() {
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center mt-24">
+          <span className="loading loading-spinner loading-lg  "></span>
+        </div>
+      }
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -16,7 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </Suspense>
   );
 }
 
