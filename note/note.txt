@@ -50,9 +50,13 @@ condition:
 progress:
 > (done) : ketika ada id product yang sama mau ditambahkan itu udah ada maka jangan tambahkan productnya dan kasih tau kalo product udah di tambahkan
 
+optimization:(done)
+Optimize web performance by implementing code splitting and lazy loading
 
-TASK
+- Use React.lazy and React.Suspense for code splitting and lazy loading of components
+- Implement caching for images to improve load times
+- Optimize image loading with lazy loading for better performance
+- Improve accessibility by ensuring interactive elements have appropriate labels
+- Use useCallback to memoize callback functions for better performance
 
-> Rapihin codenya 
-> back up codenya 
-> merge ke brach main
+This optimization aims to enhance the loading speed and overall user experience of the website.

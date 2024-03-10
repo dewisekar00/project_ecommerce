@@ -1,0 +1,78 @@
+catatan:
+
+### enhance web performance
+
+> Cara meningkatkan performance website
+
+### 1.Code Splitting: Memecah kode menjadi bundle-bundle kecil yang dibutuhkan hanya saat diperlukan.
+- seperti modal
+
+### 2.Optimasi gambar =
+
+a.Caching Gambar: Jika gambar-gambar tersebut sering digunakan atau tidak berubah secara teratur, pertimbangkan untuk menyimpannya di cache browser untuk mempercepat waktu load halaman berikutnya.
+
+b.Lazy Loading Gambar: 
+-Memuat gambar-gambar secara lazily saat gambar tersebut mulai masuk ke dalam viewport (bagian layar yang terlihat oleh pengguna). Ini dapat dilakukan dengan menggunakan atribut loading="lazy" pada tag <img>
+-Lazy Loading Gambar: Terapkan lazy loading pada gambar agar hanya dimuat saat diperlukan, bukan pada saat load awal halaman. Ini dapat mengurangi waktu load awal dan meningkatkan pengalaman pengguna.
+
+### 3.Memoization:
+
+> Filtering dan Sorting: Saat mengimplementasikan fitur filtering dan sorting pada halaman daftar produk, hasil filtering dan sorting bisa disimpan menggunakan memoization untuk menghindari pengulangan penghitungan yang tidak perlu saat pengguna mengubah kriteria filter atau pengurutan.
+
+> Autocomplete Pencarian: Ketika pengguna mulai mengetik pada kotak pencarian, hasil pencarian bisa dimori menggunakan memoization untuk menghindari pemanggilan berulang ke server atau pengulangan penghitungan hasil pencarian.
+
+> Data Pengguna yang Disimpan: Jika ada bagian dari data pengguna yang sering digunakan di berbagai komponen (seperti informasi pengguna yang masuk), menggunakan memoization dapat membantu menghindari pengulangan pemanggilan ke server atau pengulangan pengolahan data.
+
+
+### 4.Beberapa cara lainnya
+> Memperbaiki Aksesibilitas: Pastikan bahwa semua elemen interaktif memiliki label yang sesuai dan dapat diakses oleh pengguna keyboard. Ini termasuk tombol dan modal.
+
+
+> Gunakan Placeholder atau Gambar Low-Quality: Jika modal mengandung gambar, pertimbangkan untuk menggunakan placeholder atau gambar low-quality dengan ukuran yang sudah ditentukan sebagai fallback sampai gambar asli dimuat.
+
+5.`useCallback` : digunakan dalam React untuk memoize fungsi callback, yang berarti menyimpan versi fungsi tersebut dalam cache dan menggunakan versi yang sama selama dependensi tidak berubah. 
+
+__________
+
+[di file app.jsx]
+
+### Code Splitting
+
+Code splitting adalah teknik di mana kode aplikasi dibagi menjadi beberapa bundle yang dapat dimuat secara independen. Ini memungkinkan aplikasi untuk dimuat lebih cepat karena pengguna hanya perlu mengunduh bundle yang diperlukan untuk halaman yang sedang dilihat. Dalam kode Anda, setiap halaman dan komponen (seperti `Homepage`, `DetailProduct`, `ProductCart`, dan `Login`) diimpor secara dinamis menggunakan `React.lazy`. Ini berarti bahwa kode untuk halaman dan komponen ini tidak akan dimuat sampai mereka benar-benar diperlukan, yaitu saat pengguna mengunjungi halaman tersebut.
+
+### Lazy Loading
+
+Lazy loading adalah teknik di mana sumber daya (seperti gambar, video, atau dalam kasus ini, komponen) dimuat secara dinamis saat mereka benar-benar diperlukan, bukan saat halaman dimuat. Dalam konteks React, `React.lazy` digunakan untuk lazy loading komponen. Ini berarti komponen tidak akan dimuat sampai mereka benar-benar diperlukan, yaitu saat mereka pertama kali dirender.
+
+### React.Suspense
+
+`React.Suspense` digunakan untuk menangani kasus di mana komponen yang di-lazy load sedang dimuat. Ini memungkinkan Anda untuk menampilkan fallback UI (seperti spinner loading) sementara komponen sedang dimuat. Dalam kode Anda, `React.Suspense` digunakan untuk menampilkan spinner loading sementara halaman dan komponen lainnya sedang dimuat.
+
+### Alasan Menggunakan React.lazy dan React.Suspense
+
+- **Peningkatan Performa**: Dengan menggunakan code splitting dan lazy loading, aplikasi Anda akan memuat lebih cepat karena pengguna hanya perlu mengunduh kode yang benar-benar diperlukan untuk halaman yang sedang dilihat. Ini sangat berguna untuk aplikasi besar dengan banyak halaman dan komponen.
+- **Pengalaman Pengguna**: Menampilkan fallback UI sementara komponen sedang dimuat meningkatkan pengalaman pengguna dengan memberikan visual feedback bahwa aplikasi sedang bekerja.
+- **Pengelolaan Dependensi**: Menggunakan `React.lazy` memungkinkan Anda untuk mengelola dependensi komponen dengan lebih baik, karena Anda dapat memastikan bahwa komponen hanya dimuat ketika diperlukan.
+
+Secara keseluruhan, penggunaan `React.lazy` dan `React.Suspense` dalam kode Anda adalah contoh bagus dari bagaimana React memungkinkan pengembang untuk mengoptimalkan performa aplikasi mereka dengan mudah.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> TASK
+
+> mengurangi pemanggilan api secara terus menerus dengan teknik caching (Done)
+> lazy loading image di productCard (Done)
+> Memisahkan Modal jadi component yang terpisah
+> jangan banyak state karena react akan terus menerus memantau perubahan(Done di productCard bagian Modal)
+> menggunakan react lazy dan code Splitting di app.jsx agar hanya component yang diperlukan aja yang di muat(Done)

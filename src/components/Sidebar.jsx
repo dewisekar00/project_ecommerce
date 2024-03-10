@@ -1,47 +1,36 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchProductsData } from '../config/redux/Slice/productsSlice';
 
-const Sidebar = () => {
-  const dispatch = useDispatch();
-// filter product
-  const handleClick = (category, categoryName) => {
-    // call reducer
-    dispatch(fetchProductsData({ category, categoryName }));
-  };
+const Sidebar = React.memo(() => {
+ const dispatch = useDispatch();
 
-  return (
-    <div className=" ml-14 fixed">
-      <h2 className="font-bold mb-4">category</h2>
+ const handleClick = useCallback((category, categoryName) => {
+    dispatch(fetchProductsData({ category, categoryName }));
+ }, [dispatch]);
+
+ const categories = [
+    { name: "All Products", value: "" },
+    { name: "Women Fashion", value: "women's clothing" },
+    { name: "Men Fashion", value: "men's clothing" },
+    { name: "Electronic", value: "electronics" },
+    { name: "Jewelery", value: "jewelery" },
+ ];
+
+ return (
+    <div className="ml-14 fixed">
+      <h2 className="font-bold mb-4">Category</h2>
       <div>
-        <div className=" mb-4 cursor-pointer ">
-          <span className="label-text hover:text-slate-500 " onClick={() => handleClick('', " ")}>
-         All Products
-          </span>
-        </div>
-        <div className=" mb-4 cursor-pointer">
-          <span className="label-text hover:text-slate-500 " onClick={() => handleClick('category', "women's clothing")}>
-            Women Fashion
-          </span>
-        </div>
-        <div className=" mb-4 cursor-pointer">
-          <span className="label-text hover:text-slate-500" onClick={() => handleClick('category', "men's clothing")}>
-            Men Fashion
-          </span>
-        </div>
-        <div className=" mb-4 cursor-pointer">
-          <span className="label-text hover:text-slate-500" onClick={() => handleClick('category', 'electronics')}>
-            Electronic
-          </span>
-        </div>
-        <div className=" mb-4 cursor-pointer">
-          <span className="label-text hover:text-slate-500" onClick={() => handleClick('category', 'jewelery')}>
-            Jewelery
-          </span>
-        </div>
+        {categories.map((category, index) => (
+          <div key={index} className="mb-4 cursor-pointer">
+            <span className="label-text hover:text-slate-500" onClick={() => handleClick(category.value ? 'category' : '', category.value)}>
+              {category.name}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
-  );
-};
+ );
+});
 
 export default Sidebar;

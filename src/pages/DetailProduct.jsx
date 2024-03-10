@@ -1,54 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchAddCart } from "../config/redux/Slice/addCart";
 import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
+import Modal from "../components/Modal";
 
 const DetailProduct = () => {
+  const [isModalOpen, setIsModalOpen] = useState({ login: false, inCart: false, toCart: false });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {id} = useParams();
   const detailProduct = useSelector(
     (state) => state.detailProduct.detailProduct
   );
-  console.log('detailProduct test:', detailProduct)
+  // console.log('detailProduct test:', detailProduct)
   const products = useSelector((state) => state.addCart.addCart);
   const status = useSelector((state) => state.detailProduct.status);
-
+ 
+   
 useEffect(() => {
   dispatch(fetchDetailProduct(id))
 }, [dispatch, id])
-
-  const handleBack = () => {
-    navigate("/");
-  };
-  const handleToCart = () => {
-    navigate("/cart");
-  };
 
 
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      document.getElementById("my_modal_3").showModal();
+      setIsModalOpen({...isModalOpen, login: true})
     
     }else {
           // Cek apakah produk sudah ada di keranjang belanja
     const isProductExist = products.some((product) => product.id === detailProduct.id);
     if (isProductExist) {
-      document.getElementById("my_modal_2").showModal();
+     setIsModalOpen({...isModalOpen, inCart: true})
     } else {
       // Jika belum ada, tambahkan produk ke keranjang belanja
       dispatch(fetchAddCart(detailProduct.id));
-      document.getElementById("my_modal_1").showModal();
+      setIsModalOpen({...isModalOpen, toCart: true})
     }
     }
-
   };
 
-  const handleToLogin = () => {
-    navigate("/login");
-  }
+  const closeModal = useCallback(
+    (modalType) => {
+      setIsModalOpen({ ...isModalOpen, [modalType]: false });
+    },
+    [isModalOpen]
+  );
+
 
   if (status === "loading") {
     return (
@@ -59,12 +58,13 @@ useEffect(() => {
   }
 
 
+
   return (
     <>
       <div className="p-8 ">
         <span
           className="material-symbols-outlined bg-green-300  text-white rounded-full p-2 cursor-pointer mb-8 "
-          onClick={handleBack}
+          onClick={() =>  navigate("/")}
         >
           arrow_back
         </span>
@@ -95,61 +95,27 @@ useEffect(() => {
             >
               Add to cart
             </button>
-
-            <dialog id="my_modal_1" className="modal">
-              <div className="modal-box">
-                <h3 className="font-bold text-lg">succeed</h3>
-                <p className="py-4">Product Successfully added!</p>
-                <div className="modal-action">
-                  <form method="dialog">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">close</button>
-                    <button
-                      className="btn bg-green-300   mx-4"
-                      onClick={handleToCart}
-                    >
-                      view cart
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
-            <dialog id="my_modal_2" className="modal">
-              <div className="modal-box">
-                <h3 className="font-bold text-lg">message</h3>
-                <p className="py-4">The product is already in the cart!</p>
-                <div className="modal-action">
-                  <form method="dialog">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">close</button>
-                    <button
-                      className="btn bg-green-300   mx-4"
-                      onClick={handleToCart}
-                    >
-                      view cart
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
-            <dialog id="my_modal_3" className="modal">
-              <div className="modal-box">
-                <h3 className="font-bold text-lg">message</h3>
-                <p className="py-4">Kamu belum login nih,login dulu yuk!</p>
-                <div className="modal-action">
-                  <form method="dialog">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">close</button>
-                    <button
-                      className="btn bg-green-300   mx-4"
-                      onClick={handleToLogin}
-                    >
-                     login
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
+            <Modal
+                isOpen={isModalOpen.inCart}
+                message="The product is already in the cart!"
+                onClose={() => closeModal("inCart")}
+                onConfirm={() => navigate("/cart")}
+                value="view cart"
+              />
+            <Modal
+                isOpen={isModalOpen.toCart}
+                message="successed add product"
+                onClose={() => closeModal("toCart")}
+                onConfirm={() => navigate("/cart")}
+                value="view cart"
+              />
+              <Modal
+                isOpen={isModalOpen.login}
+                message="Kamu belum login nih,login dulu yuk!"
+                onClose={() => closeModal("login")}
+                onConfirm={() => navigate("/login")}
+                value="login"
+              />
           </div>
         </div>
       </div>
