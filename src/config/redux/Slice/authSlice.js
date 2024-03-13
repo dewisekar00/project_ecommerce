@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userCredential) => {
@@ -21,7 +19,6 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -48,5 +45,4 @@ const authSlice = createSlice({
       });
   },
 });
-
 export default authSlice.reducer;

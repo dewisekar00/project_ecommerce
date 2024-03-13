@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react";
 import { fetchAddCart } from "../config/redux/Slice/addCart";
 import { useNavigate } from "react-router-dom";
 import { fetchDetailProduct } from "../config/redux/Slice/detailProduct";
-
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "./Modal";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductCard = (props) => {
   const [isModalOpen, setIsModalOpen] = useState({ login: false, cart: false });
@@ -26,10 +26,6 @@ const ProductCard = (props) => {
       }
     }
   }, [dispatch, id, products]);
-
-  /*
-note: Dengan menggunakan useCallback, React akan memastikan bahwa toDetailProduct hanya dibuat ulang jika salah satu dari dependensi ini berubah
-  */
   const toDetailProduct = useCallback(() => {
     navigate(`/detail-product/${id}`);
     dispatch(fetchDetailProduct(id));
@@ -46,17 +42,19 @@ note: Dengan menggunakan useCallback, React akan memastikan bahwa toDetailProduc
     <>
       <div>
         <div className="card card-compact w-40 h-72 sm:w-48 sm:h-72 bg-base-100 shadow-xl ">
-          <figure className="h-[200px]">
-            <div onClick={toDetailProduct} className="cursor-pointer h-full">
-              <img
+          <figure className="h-32">
+            <div onClick={toDetailProduct} className="cursor-pointer h-full ">
+              <LazyLoadImage
+                width="100%"
+                height="100%"
+                alt="image"
+                placeholderSrc="../assets/placeholder-image.webp"
                 src={image}
-                alt="product image"
-                className="h-full  w-full object-cover"
-                loading="lazy"
+                className="h-full w-full object-cover"
               />
             </div>
           </figure>
-          <div className="card-body h-48 ">
+          <div className="card-body   h-32 ">
             <div className="h-24">
               <h2
                 className="card-title text-sm text-[12px] cursor-pointer"
@@ -73,21 +71,24 @@ note: Dengan menggunakan useCallback, React akan memastikan bahwa toDetailProduc
               >
                 Add to cart
               </button>
-
-              <Modal
-                isOpen={isModalOpen.cart}
-                message="The product is already in the cart!"
-                onClose={() => closeModal("cart")}
-                onConfirm={() => navigate("/cart")}
-                value="view cart"
-              />
-              <Modal
-                isOpen={isModalOpen.login}
-                message="Kamu belum login nih,login dulu yuk!"
-                onClose={() => closeModal("login")}
-                onConfirm={() => navigate("/login")}
-                value="login"
-              />
+              {isModalOpen.cart && (
+                <Modal
+                  isOpen={isModalOpen.cart}
+                  message="The product is already in the cart!"
+                  onClose={() => closeModal("cart")}
+                  onConfirm={() => navigate("/cart")}
+                  value="view cart"
+                />
+              )}
+              {isModalOpen.login && (
+                <Modal
+                  isOpen={isModalOpen.login}
+                  message="Kamu belum login nih,login dulu yuk!"
+                  onClose={() => closeModal("login")}
+                  onConfirm={() => navigate("/login")}
+                  value="login"
+                />
+              )}
             </div>
           </div>
         </div>
