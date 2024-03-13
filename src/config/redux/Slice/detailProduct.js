@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
 export const fetchDetailProduct = createAsyncThunk(
   "products/fetchDetailProduct",
   async (id) => {
@@ -9,12 +8,11 @@ export const fetchDetailProduct = createAsyncThunk(
     return response.data;
   }
 );
-
 const detailProductSlice = createSlice({
   name: "detailProduct",
   initialState: {
-   detailProduct: {},
-   status: 'idle'
+    detailProduct: {},
+    status: "idle",
   },
   reducers: {
     setStatus(state, action) {
@@ -35,7 +33,5 @@ const detailProductSlice = createSlice({
       });
   },
 });
-
 export const { setStatus } = detailProductSlice.actions;
-
 export default detailProductSlice.reducer;

@@ -1,7 +1,8 @@
 catatan:
 
 ### enhance web performance
-
+from: 28
+nowL 49
 > Cara meningkatkan performance website
 
 ### 1.Code Splitting: Memecah kode menjadi bundle-bundle kecil yang dibutuhkan hanya saat diperlukan.
@@ -55,16 +56,41 @@ Lazy loading adalah teknik di mana sumber daya (seperti gambar, video, atau dala
 - **Pengelolaan Dependensi**: Menggunakan `React.lazy` memungkinkan Anda untuk mengelola dependensi komponen dengan lebih baik, karena Anda dapat memastikan bahwa komponen hanya dimuat ketika diperlukan.
 
 Secara keseluruhan, penggunaan `React.lazy` dan `React.Suspense` dalam kode Anda adalah contoh bagus dari bagaimana React memungkinkan pengembang untuk mengoptimalkan performa aplikasi mereka dengan mudah.
+  /*
+note: Dengan menggunakan useCallback, React akan memastikan bahwa toDetailProduct hanya dibuat ulang jika salah satu dari dependensi ini berubah
+  */
+
+Update performance: 3/13/2024
+
+>pake react library lazyloading
+
+from this 
+     <img
+                src={image}
+                alt="product image"
+                className="h-full  w-full object-cover"
+                loading="lazy"
+              />
 
 
+to this
+
+    <figure className="h-32">
+            <div onClick={toDetailProduct} className="cursor-pointer h-full ">
+              <LazyLoadImage
+                width="100%"
+                height="100%"
+                alt="image"
+                placeholderSrc="../assets/placeholder-image.webp"
+                src={image}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </figure>
 
 
-
-
-
-
-
-
+          > pake <link rel="dns-prefetch" href="//fakestoreapi.com"> di head 
+Prefetch memulai proses resolusi DNS untuk sumber daya eksternal sebelum mereka benar-benar dibutuhkan, yang dapat mengurangi waktu yang dibutuhkan untuk membuat koneksi.(maybe)
 
 
 
@@ -76,3 +102,9 @@ Secara keseluruhan, penggunaan `React.lazy` dan `React.Suspense` dalam kode Anda
 > Memisahkan Modal jadi component yang terpisah
 > jangan banyak state karena react akan terus menerus memantau perubahan(Done di productCard bagian Modal)
 > menggunakan react lazy dan code Splitting di app.jsx agar hanya component yang diperlukan aja yang di muat(Done)
+> pake  react library lazyloading untuk menambahkan lazy loading dan placeholder image agar kalo image masih loading maka munculin placeholder image dulu(Done)
+> pake conditial rendering untuk modal agar ngga ikut dirender ketika productCard dirender dan hanya dirender ketika state modal nya true (Done)
+
+
+
+Ingatlah bahwa optimasi performa adalah proses iteratif, dan mungkin diperlukan beberapa percobaan dan penyesuaian untuk mencapai hasil terbaik.
